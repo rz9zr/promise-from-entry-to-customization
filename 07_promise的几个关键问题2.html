@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        3. 改变promise状态和指定回调函数谁先谁后？
+            3.1 都有可能，正常情况下是先指定回调再改变状态，但也可以先改变状态再指定回调
+            3.2 如何先改变状态再指定回调？
+                3.2.1 在执行器中直接调用resolve()/reject()
+                3.2.2 延迟更长时间才调用then()
+            3.3 什么时候才能得到数据？
+                3.3.1 如果先指定回调，当状态发生改变时，回调函数就会调用，得到数据
+                3.3.2 如果先改变状态，当指定回调时，回调函数就会调用，得到数据。
+        */
+        const p = new Promise((resolve, reject) => {
+            // resolve(1); // promise变为resolved成功状态
+            // reject(2); // promise变为rejected失败状态
+            // throw new Error('出错了');
+            throw 3;
+        });
+        p.then(data => console.log('a',data))
+            .catch(reason => console.log('a',reason));
+        p.then(data => console.log('b',data))
+            .catch(reason => console.log('b',reason));
+    </script>
+</body>
+
+</html>
